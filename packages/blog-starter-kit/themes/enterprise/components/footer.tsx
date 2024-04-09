@@ -28,7 +28,7 @@ export const Footer = () => {
 					<div>
 						{LOGO_FAVICON ? (
 							<div className="flex items-center text-gray-900">
-								<Link href={'/'} aria-label={`${publication.title} home page`}>
+								<Link href="/" aria-label={`${publication.title} home page`}>
 									<Image
 										src={LOGO_FAVICON}
 										alt={publication.title}
