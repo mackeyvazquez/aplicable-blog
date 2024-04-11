@@ -1,10 +1,8 @@
-import { resizeImage } from '@starter-kit/utils/image';
 import { useState } from 'react';
 import { twJoin } from 'tailwind-merge';
 import { PostFullFragment, User } from '../generated/graphql';
 import CoAuthorsModal from './co-authors-modal';
 import { useAppContext } from './contexts/appContext';
-import { CoverImage } from './cover-image';
 import { DateFormatter } from './date-formatter';
 import { ReadTimeInMinutes } from './post-read-time-in-minutes';
 import { PostTitle } from './post-title';
@@ -96,7 +94,7 @@ export const PostHeader = ({ title, coverImage, date, author, readTimeInMinutes 
 					<ReadTimeInMinutes readTimeInMinutes={readTimeInMinutes} />
 				</div>
 			</div>
-			{coverImage && (
+			{/* {coverImage && (
 				<div className="w-full px-5 sm:mx-0">
 					<CoverImage
 						title={title}
@@ -104,7 +102,7 @@ export const PostHeader = ({ title, coverImage, date, author, readTimeInMinutes 
 						priority={true}
 					/>
 				</div>
-			)}
+			)} */}
 			{isCoAuthorModalVisible && <CoAuthorsModal closeModal={closeCoAuthorModal} />}
 		</>
 	);
