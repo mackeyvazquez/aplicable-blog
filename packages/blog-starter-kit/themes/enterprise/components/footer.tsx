@@ -28,7 +28,7 @@ export const Footer = () => {
 					<div>
 						{LOGO_FAVICON ? (
 							<div className="flex items-center text-gray-900">
-								<a href="/#hero" aria-label={`${publication.title} home page`}>
+								<Link href="/" aria-label={`${publication.title} home page`}>
 									<Image
 										src={LOGO_FAVICON}
 										alt={publication.title}
@@ -36,7 +36,7 @@ export const Footer = () => {
 										height={70}
 										className="w-22 h-22 flex-none"
 									/>
-								</a>
+								</Link>
 								<div>
 									<p className="text-base font-semibold">Aplicable AI</p>
 									<p className="mt-1 text-sm">
