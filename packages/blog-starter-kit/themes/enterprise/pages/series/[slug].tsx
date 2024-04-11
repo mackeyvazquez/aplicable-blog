@@ -105,6 +105,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
 	}
 	const posts = publication.series ? publication.series.posts.edges.map((edge) => edge.node) : [];
 
+	console.log('🔥' + series.id);
 	return {
 		props: {
 			series,
