@@ -903,6 +903,18 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
+input DeleteRoleBasedInviteInput {
+  """The ID of the role based invite."""
+  inviteId: ID!
+  publicationId: ID!
+}
+
+"""Response to deleting a role based invite."""
+type DeleteRoleBasedInvitePayload {
+  """Deleted invite."""
+  invite: RoleBasedInvite!
+}
+
 type DeleteWebhookPayload {
   webhook: Webhook
 }
@@ -1532,6 +1544,8 @@ type Mutation {
   """Creates a new series."""
   createSeries(input: CreateSeriesInput!): CreateSeriesPayload!
   createWebhook(input: CreateWebhookInput!): CreateWebhookPayload!
+  """Deletes a role based invite."""
+  deleteRoleBasedInvite(input: DeleteRoleBasedInviteInput!): DeleteRoleBasedInvitePayload!
   deleteWebhook(id: ID!): DeleteWebhookPayload!
   """Likes a comment."""
   likeComment(input: LikeCommentInput!): LikeCommentPayload!
@@ -2470,10 +2484,22 @@ type PublicationLinks {
 type PublicationMember implements Node {
   """The ID of the publication member."""
   id: ID!
+  """
+  Denotes if the member is public or private
+  A private member is not visible on members page
+  """
+  privacyState: PublicationMemberPrivacyState
   """The role of the user in the publication."""
   role: UserPublicationRole!
   """The user who is a member of the publication."""
   user: User
+}
+
+enum PublicationMemberPrivacyState {
+  """The member is private and not visible on the members page."""
+  PRIVATE
+  """The member is public and visible on the members page."""
+  PUBLIC
 }
 
 """Contains the publication's navbar items."""
@@ -2906,6 +2932,21 @@ type RestorePostPayload {
   post: Post
 }
 
+type RoleBasedInvite implements Node {
+  """The capacity of how many members to be invited by the link."""
+  capacity: Int
+  """The expiry date of the invite."""
+  expiryDate: DateTime
+  """The ID of the role based invite."""
+  id: ID!
+  """Invite link of the role based invite."""
+  inviteLink: String
+  """Boolean that signifies if the invite has unlimited capacity."""
+  isUnlimitedCapacity: Boolean
+  """The role assigned to the user in the publication."""
+  role: UserPublicationRole!
+}
+
 """Information to help in seo related meta tags."""
 type SEO {
   """The description used in og:description tag for SEO purposes."""
@@ -3008,6 +3049,17 @@ input SearchPostsOfPublicationFilter {
   publicationId: ObjectId!
   """The query to be searched in post."""
   query: String!
+}
+
+type SearchUser implements Node {
+  """ID of the user."""
+  id: ID!
+  """
+  Signifies if the user has a pending invite to the publication. Returned when the filter has pendingInviteStatus set to true.
+  """
+  pendingInviteStatus: Boolean
+  """User node containing the user information."""
+  user: User!
 }
 
 """
